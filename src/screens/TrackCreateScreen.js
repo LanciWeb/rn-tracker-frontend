@@ -1,7 +1,8 @@
 import React from 'react';
 import Map from '../components/Map';
+import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import SafeArea from '../components/SafeArea';
 import { requestPermissionsAsync } from 'expo-location';
 
 const TrackCreateScreen = () => {
@@ -21,11 +22,11 @@ const TrackCreateScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }}>
+    <SafeArea>
       <Text h2>Create a Track</Text>
       <Map />
       {err ? <Text>Please enable location services</Text> : null}
-    </SafeAreaView>
+    </SafeArea>
   );
 };
 
