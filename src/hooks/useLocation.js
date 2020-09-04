@@ -5,15 +5,16 @@ import {
 } from 'expo-location';
 import { useState, useEffect } from 'react';
 
-export default (callback) => {
+export default (shouldTrack, callback) => {
   const [err, setErr] = useState(null);
+  const [subscriber, setSubscriber] = useState(null);
   const startWatching = async () => {
     try {
       const granted = await requestPermissionsAsync();
       if (!granted) {
         throw new Error('Permission Denied');
       }
-      await watchPositionAsync(
+      const sub = await watchPositionAsync(
         {
           timeInterval: 1000,
           distanceInterval: 10,
@@ -23,15 +24,20 @@ export default (callback) => {
           callback(location);
         }
       );
+      setSubscriber(sub);
     } catch (e) {
-      console.log('siamo qui');
       setErr(e);
     }
   };
 
   useEffect(() => {
-    startWatching();
-  }, []);
+    if (shouldTrack) {
+      startWatching();
+    } else {
+      subscriber.remove();
+      setSubscriber(null);
+    }
+  }, [shouldTrack]);
 
   return [err];
 };

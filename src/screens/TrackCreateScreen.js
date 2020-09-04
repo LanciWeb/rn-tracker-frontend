@@ -1,8 +1,3 @@
-import {
-  Accuracy,
-  watchPositionAsync,
-  requestPermissionsAsync,
-} from 'expo-location';
 import React from 'react';
 import '../_mockLocations';
 import Map from '../components/Map';
@@ -10,11 +5,12 @@ import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import SafeArea from '../components/SafeArea';
 import useLocation from '../hooks/useLocation';
+import { withNavigationFocus } from 'react-navigation';
 import { Context as LocationContext } from '../context/LocationContext';
 
-const TrackCreateScreen = () => {
+const TrackCreateScreen = ({ isFocused }) => {
   const { addLocation } = React.useContext(LocationContext);
-  const [err] = useLocation(addLocation);
+  const [err] = useLocation(isFocused, addLocation);
   return (
     <SafeArea>
       <Text h2>Create a Track</Text>
@@ -24,6 +20,6 @@ const TrackCreateScreen = () => {
   );
 };
 
-export default TrackCreateScreen;
+export default withNavigationFocus(TrackCreateScreen);
 
 const styles = StyleSheet.create({});
