@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import SafeArea from '../components/SafeArea';
 import useLocation from '../hooks/useLocation';
+import TrackForm from '../components/TrackForm';
 import { withNavigationFocus } from 'react-navigation';
 import { Context as LocationContext } from '../context/LocationContext';
 
@@ -16,6 +17,7 @@ const TrackCreateScreen = ({ isFocused }) => {
       <Text h2>Create a Track</Text>
       <Map />
       {err ? <Text>Please enable location services</Text> : null}
+      <TrackForm />
     </SafeArea>
   );
 };
