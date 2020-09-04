@@ -12,6 +12,7 @@ import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { startNetworkLogging } from 'react-native-network-logger';
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import { Provider as LocationProvider } from './src/context/LocationContext';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 const switchNavigator = createSwitchNavigator({
@@ -37,11 +38,13 @@ export default () => {
   startNetworkLogging();
   return (
     <AuthProvider>
-      <App
-        ref={(navigator) => {
-          setNavigator(navigator);
-        }}
-      />
+      <LocationProvider>
+        <App
+          ref={(navigator) => {
+            setNavigator(navigator);
+          }}
+        />
+      </LocationProvider>
     </AuthProvider>
   );
 };
