@@ -1,19 +1,35 @@
 import React from 'react';
+import '../_mockLocations';
 import Map from '../components/Map';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import SafeArea from '../components/SafeArea';
-import { requestPermissionsAsync } from 'expo-location';
+import {
+  Accuracy,
+  watchPositionAsync,
+  requestPermissionsAsync,
+} from 'expo-location';
 
 const TrackCreateScreen = () => {
   const [err, setErr] = React.useState(null);
   const startWatching = async () => {
     try {
       const granted = await requestPermissionsAsync();
+      await watchPositionAsync(
+        {
+          timeInterval: 1000,
+          distanceInterval: 10,
+          accuracy: Accuracy.BestForNavigation,
+        },
+        (location) => {
+          console.log(location);
+        }
+      );
       if (!granted) {
-        setErr('Permission Denied');
+        throw new Error('Permission Denied');
       }
     } catch (e) {
+      console.log('siamo qui');
       setErr(e);
     }
   };
