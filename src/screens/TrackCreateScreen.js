@@ -10,8 +10,10 @@ import { withNavigationFocus } from 'react-navigation';
 import { Context as LocationContext } from '../context/LocationContext';
 
 const TrackCreateScreen = ({ isFocused }) => {
-  const { addLocation } = React.useContext(LocationContext);
-  const [err] = useLocation(isFocused, addLocation);
+  const { recording, addLocation } = React.useContext(LocationContext);
+  const [err] = useLocation(isFocused, (location) => {
+    addLocation(location, recording);
+  });
   return (
     <SafeArea>
       <Text h2>Create a Track</Text>
