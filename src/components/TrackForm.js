@@ -4,11 +4,13 @@ import { Input, Button } from 'react-native-elements';
 import { Context as LocationContext } from '../context/LocationContext';
 const TrackForm = () => {
   const {
-    state: { name, recording, locations },
-    startRecording,
-    stopRecording,
     changeName,
+    stopRecording,
+    startRecording,
+    state: { name, recording, locations },
   } = React.useContext(LocationContext);
+
+  console.log(locations.length);
 
   return (
     <>
