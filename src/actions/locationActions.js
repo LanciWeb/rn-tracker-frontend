@@ -1,6 +1,6 @@
-const changeName = (dispatch = (name) => {
+const changeName = (dispatch) => (name) => {
   dispatch({ type: 'change_name', payload: name });
-});
+};
 
 const stopRecording = (dispatch) => () => {
   dispatch({ type: 'stop_recording' });
