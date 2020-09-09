@@ -13,4 +13,14 @@ const addLocation = (dispatch) => (location, recording) => {
   if (recording) dispatch({ type: 'add_location', payload: location });
 };
 
-export default { changeName, addLocation, stopRecording, startRecording };
+const resetLocation = (dispatch) => () => {
+  dispatch({ type: 'reset' });
+};
+
+export default {
+  changeName,
+  addLocation,
+  stopRecording,
+  startRecording,
+  resetLocation,
+};
