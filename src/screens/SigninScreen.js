@@ -1,14 +1,15 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import NavLink from '../components/NavLink';
 import AuthForm from '../components/AuthForm';
-import { StyleSheet, View } from 'react-native';
+import SafeArea from '../components/SafeArea';
 import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 
 const SigninScreen = () => {
   const { state, signIn, clearErrorMessage } = React.useContext(AuthContext);
   return (
-    <View style={styles.container}>
+    <SafeArea style={styles.container}>
       <NavigationEvents
         // onDidBlur={() => {}}
         // onDidFocus={() => {}}
@@ -25,7 +26,7 @@ const SigninScreen = () => {
         routeName="Signup"
         text="Don't ypu have an account? Sign up instead."
       />
-    </View>
+    </SafeArea>
   );
 };
 
