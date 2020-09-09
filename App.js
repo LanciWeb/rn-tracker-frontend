@@ -1,6 +1,5 @@
-import { Provider as LocationProvider } from './src/context/LocationContext';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import React from 'react';
+import { FontAwesome } from '@expo/vector-icons';
 import { setNavigator } from './src/navigationRef';
 import LoaderScreen from './src/screens/LoaderScreen';
 import SigninScreen from './src/screens/SigninScreen';
@@ -15,6 +14,18 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { startNetworkLogging } from 'react-native-network-logger';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as TrackProvider } from './src/context/TrackContext';
+import { Provider as LocationProvider } from './src/context/LocationContext';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+const trackListStackNavigator = createStackNavigator({
+  TrackList: TrackListScreen,
+  TrackDetail: TrackDetailScreen,
+});
+
+trackListStackNavigator.navigationOptions = () => ({
+  title: 'Tracks',
+  tabBarIcon: <FontAwesome name="th-list" size={20} />,
+});
+
 const switchNavigator = createSwitchNavigator({
   loaderScreen: LoaderScreen,
   loginFlow: createStackNavigator({
@@ -25,10 +36,7 @@ const switchNavigator = createSwitchNavigator({
   mainFlow: createBottomTabNavigator({
     Account: AccountScreen,
     TrackCreate: TrackCreateScreen,
-    trackListFlow: createStackNavigator({
-      TrackList: TrackListScreen,
-      TrackDetail: TrackDetailScreen,
-    }),
+    trackListFlow: trackListStackNavigator,
   }),
 });
 
