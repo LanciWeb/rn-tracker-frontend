@@ -1,3 +1,5 @@
+import { Provider as LocationProvider } from './src/context/LocationContext';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import React from 'react';
 import { setNavigator } from './src/navigationRef';
 import LoaderScreen from './src/screens/LoaderScreen';
@@ -12,9 +14,7 @@ import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { startNetworkLogging } from 'react-native-network-logger';
 import { Provider as AuthProvider } from './src/context/AuthContext';
-import { Provider as LocationProvider } from './src/context/LocationContext';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-
+import { Provider as TrackProvider } from './src/context/TrackContext';
 const switchNavigator = createSwitchNavigator({
   loaderScreen: LoaderScreen,
   loginFlow: createStackNavigator({
@@ -39,11 +39,13 @@ export default () => {
   return (
     <AuthProvider>
       <LocationProvider>
-        <App
-          ref={(navigator) => {
-            setNavigator(navigator);
-          }}
-        />
+        <TrackProvider>
+          <App
+            ref={(navigator) => {
+              setNavigator(navigator);
+            }}
+          />
+        </TrackProvider>
       </LocationProvider>
     </AuthProvider>
   );
