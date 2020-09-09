@@ -18,7 +18,7 @@ const Map = () => {
   };
 
   return (
-    <MapView region={coords} style={styles.map}>
+    <MapView region={coords} style={styles.map} initialRegion={coords}>
       <Circle
         radius={30}
         center={currentLocation.coords}
