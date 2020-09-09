@@ -3,7 +3,7 @@ export default (state, action) => {
   const prevState = Object.assign({}, state);
   switch (type) {
     case 'reset':
-      return { ...prevState, name: '', location: '' };
+      return { ...prevState, name: '', locations: [] };
     case 'change_name':
       return { ...prevState, name: payload };
     case 'stop_recording':
