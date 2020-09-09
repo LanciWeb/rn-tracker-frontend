@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { navigate } from '../navigationRef';
 import { Context as TrackContext } from '../context/TrackContext';
 import { Context as LocationContext } from '../context/LocationContext';
 
@@ -12,6 +13,7 @@ export default () => {
   const saveTrack = async () => {
     await createTrack(name, locations);
     resetLocation();
+    navigate('TrackList');
   };
   return [saveTrack];
 };
